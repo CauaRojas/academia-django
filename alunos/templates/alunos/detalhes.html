@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block conteudo %}
+<div>
+    <h1>{{aluno.id}} - {{aluno.nome}}</h1>
+    <h2>Email: {{aluno.email}}</h2>
+    <h2>Telefone: {{aluno.telefone}}</h2>
+    <h4>Data de Nascimento: {{aluno.data_nascimento}}</h4>
+    <h4>Data de Matricula: {{aluno.data_criacao|date:'d/m/Y' }}</h4>
+    <h4>
+        Data de Vencimento da Matricula:
+        {{aluno.data_vencimento_matricula|date:'d/m/Y'}}
+    </h4>
+</div>
+{% endblock conteudo %}
