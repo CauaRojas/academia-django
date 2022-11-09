@@ -14,8 +14,10 @@
         <title>Academia</title>
     </head>
     <body>
-        {% include "parciais/_nav.html" %} 
-        {% block conteudo %} {% endblock conteudo %}
+        {% include "parciais/_nav.html" %}
+        {% include 'parciais/_messages.html'%}
+        {% block conteudo %}
+        {% endblock conteudo %}
     </body>
     <!-- JavaScript Bundle with Popper -->
     <script

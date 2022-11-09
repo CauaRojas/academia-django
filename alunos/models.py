@@ -22,6 +22,7 @@ class Aluno(models.Model):
     data_nascimento = models.DateTimeField()
     data_vencimento_matricula = models.DateTimeField(
         default=timezone.now() + timedelta(days=30))
+    foto = models.ImageField(upload_to='fotos/%Y/%m/', blank=True)
 
     def __str__(self) -> str:
         return self.nome
