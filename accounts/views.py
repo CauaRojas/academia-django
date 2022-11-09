@@ -91,4 +91,4 @@ def dashboard(request):
         return render(request, 'accounts/dashboard.html', {'form': form})
 
     form.save()
-    return redirect('dashboard')
+    return redirect('index')

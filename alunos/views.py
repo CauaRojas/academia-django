@@ -4,7 +4,7 @@ from django.http import Http404
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
-
+from datetime import timedelta
 
 def index(request):
 
@@ -40,3 +40,9 @@ def busca(request):
     return render(request, 'alunos/busca.html', {
         'alunos': alunos,
     })
+
+def add_tempo(request, id):
+    aluno = get_object_or_404(Aluno, id=id)
+    aluno.data_vencimento_matricula = aluno.data_vencimento_matricula + timedelta(days=30)
+    aluno.save()
+    return redirect('aluno', aluno_id=id)
