@@ -5,6 +5,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
 from datetime import timedelta
+from datetime import datetime
+
 
 def index(request):
 
@@ -20,6 +22,10 @@ def index(request):
 def aluno(request, aluno_id):
     #aluno = Aluno.objects.get(id=aluno_id)
     aluno = get_object_or_404(Aluno, id=aluno_id)
+
+    if aluno.data_vencimento_matricula.timestamp() < datetime.now().timestamp():
+        messages.add_message(request, messages.ERROR,
+                             'Matrícula vencida')
     return render(request, 'alunos/detalhes.html', {
         'aluno': aluno
     })
@@ -41,8 +47,16 @@ def busca(request):
         'alunos': alunos,
     })
 
+
 def add_tempo(request, id):
     aluno = get_object_or_404(Aluno, id=id)
-    aluno.data_vencimento_matricula = aluno.data_vencimento_matricula + timedelta(days=30)
+    aluno.data_vencimento_matricula = aluno.data_vencimento_matricula + \
+        timedelta(days=30)
     aluno.save()
     return redirect('aluno', aluno_id=id)
+
+
+def deletar(request, id):
+    aluno = get_object_or_404(Aluno, id=id)
+    aluno.delete()
+    return redirect('index')

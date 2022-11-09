@@ -14,15 +14,21 @@
     <h6>Telefone: {{aluno.telefone}}</h6>
     <h6>Data de Nascimento: {{aluno.data_nascimento}}</h6>
     <h6>Data de Matricula: {{aluno.data_criacao|date:'d/m/Y' }}</h6>
-    <h6>
+    <h6 style="">
         Data de Vencimento da Matricula:
         {{aluno.data_vencimento_matricula|date:'d/m/Y'}}
     </h6>
-    <form action="{% url 'add_tempo' aluno.id %}" method="post">
+    {% if user.is_authenticated %}
+    <form action="{% url 'add_tempo' aluno.id %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">
             Adicione 1 Mês a Matricula
         </button>
     </form>
+    <form action="{% url 'deletar' aluno.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Deletar Aluno</button>
+    </form>
+    {% endif %}
 </div>
 {% endblock conteudo %}
