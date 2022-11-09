@@ -1,6 +1,7 @@
-from django.db import models
-from alunos.models import Aluno
 from django import forms
+from django.db import models
+
+from alunos.models import Aluno
 
 
 class FormAluno(forms.ModelForm):
