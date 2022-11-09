@@ -23,6 +23,7 @@
                     <a class="nav-link" href="/admin">Admin</a>
                 </li>
             </ul>
+            {% if 'accounts' not in request.path %}
             <form
                 class="d-flex"
                 role="search"
@@ -41,6 +42,7 @@
                     Pesquisar
                 </button>
             </form>
+            {% endif %}
         </div>
     </div>
 </nav>
