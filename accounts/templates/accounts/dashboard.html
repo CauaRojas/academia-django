@@ -1,3 +1,23 @@
 {% extends "base.html" %} {% block conteudo %}
-<p>dashboard</p>
-{% endblock %}
+<h1><center>Olá {{user.first_name}} {{user.last_name}}</center></h1>
+
+<div class="container">
+    <form
+        action="{% url 'dashboard' %}"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+        {% csrf_token %}
+        <table class="table">
+            {{ form.as_table }}
+            <tr>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-primary">
+                        Enviar
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% include "parciais/_messages.html" %} {% endblock %}

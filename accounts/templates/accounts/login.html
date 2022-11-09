@@ -1,3 +1,22 @@
 {% extends "base.html" %} {% block conteudo %}
-<p>login</p>
-{% endblock %}
+<h1>login</h1>
+{% include 'parciais/_messages.html' %} {% if not user.is_authenticated %}
+<form action="{% url 'login' %}" method="post" class="form-group">
+    {% csrf_token %}
+    <br /><label for="usuario">Usuário</label>
+    <input type="text" name="user" placeholder="Usuário" class="form-control" />
+    <label for="senha">Senha</label>
+    <input
+        type="password"
+        name="senha"
+        placeholder="Senha"
+        class="form-control"
+    /><br />
+    <input type="submit" value="Entrar" class="btn btn-primary" />
+</form>
+{% else %}
+<p>
+    Você já está logado como <strong>{{ user.username }}</strong>,
+    <a href="{% url 'logout' %}">Clique aqui</a> para sair.
+</p>
+{% endif %} {% endblock %}
